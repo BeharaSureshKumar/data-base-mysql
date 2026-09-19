@@ -1,0 +1,37 @@
+CREATE DATABASE db_practice; #schema
+
+#tables 
+CREATE TABLE db_practice.customers (
+    customer_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE,
+    phone VARCHAR(20),
+    age INT,
+    city VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE db_practice.products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    category VARCHAR(50),
+    price DECIMAL(10,2),
+    stock_quantity INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE db_practice.orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    quantity INT,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(30) DEFAULT 'Pending',
+    total_amount DECIMAL(10,2),
+
+    FOREIGN KEY (customer_id)
+        REFERENCES customers(customer_id),
+
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
+);
