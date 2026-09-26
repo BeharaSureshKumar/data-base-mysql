@@ -1,0 +1,38 @@
+CREATE TABLE Student (
+    id INT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    age INT CHECK (age >= 18),
+    status VARCHAR(20) DEFAULT 'Active'
+);   // creation at table level
+
+==============
+  ALTER for an existing table
+
+CREATE TABLE Student (
+    id INT,
+    name VARCHAR(50),
+    email VARCHAR(100),
+    age INT,
+    status VARCHAR(20)
+); 
+
+ALTER TABLE Student
+MODIFY name VARCHAR(50) NOT NULL;
+
+ALTER TABLE Student
+ADD CONSTRAINT uq_email UNIQUE (email);
+
+ALTER TABLE Student
+ADD CONSTRAINT chk_age CHECK (age >= 18);
+
+ALTER TABLE Student
+ALTER status SET DEFAULT 'Active';
+
+# Easy way to remember
+----------------
+NOT NULL → MODIFY
+UNIQUE   → ADD CONSTRAINT ... UNIQUE
+CHECK    → ADD CONSTRAINT ... CHECK
+DEFAULT  → ALTER ... SET DEFAULT
+
